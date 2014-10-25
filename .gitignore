@@ -41,3 +41,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Directories with auto-generated files
+/bin/*
+/gen/*
