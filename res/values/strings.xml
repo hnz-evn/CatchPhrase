@@ -3,7 +3,7 @@
 
     <string name="app_name">CatchPhrase</string>
     <string name="hello_world">Hello world!</string>
-    <string name="next_button">Hello world!</string>
-    <string name="skip_button">Hello world!</string>
+    <string name="next_button">Next</string>
+    <string name="skip_button">Skip</string>
 
 </resources>
