@@ -1,6 +1,7 @@
 package com.catchphrase;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -39,6 +40,8 @@ public class CatchPhraseActivity extends Activity {
 				mTimerTextView.setText("0s");
 				Toast toast = Toast.makeText(getApplicationContext(), "Time's up!", Toast.LENGTH_LONG);
 				toast.show();
+				Intent i = new Intent(CatchPhraseActivity.this, MenuActivity.class);
+				startActivity(i);
 			}
 		};
 		mTimer.start();
