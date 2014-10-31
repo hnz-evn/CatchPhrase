@@ -40,8 +40,7 @@ public class CatchPhraseActivity extends Activity {
 				mTimerTextView.setText("0s");
 				Toast toast = Toast.makeText(getApplicationContext(), "Time's up!", Toast.LENGTH_LONG);
 				toast.show();
-				Intent i = new Intent(CatchPhraseActivity.this, MenuActivity.class);
-				startActivity(i);
+				CatchPhraseActivity.super.finish();
 			}
 		};
 		mTimer.start();
