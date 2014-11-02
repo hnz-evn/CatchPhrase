@@ -24,8 +24,8 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <component android:name="com.catchphrase.MenuActivity.java" />
             </intent-filter>
         </activity>
     </application>
