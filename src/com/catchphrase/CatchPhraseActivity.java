@@ -24,7 +24,8 @@ public class CatchPhraseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_catch_phrase);
 		
-		mWords = new Words();
+		// initialize Words class with CatchPhraseActivity context
+		mWords = new Words(this);
 		
 		// put first word into phrase textview
 		mCatchphraseTextView = (TextView) findViewById(R.id.catchphrase_display);
@@ -32,7 +33,7 @@ public class CatchPhraseActivity extends Activity {
 		
 		// set up timer and tie it to timer textview
 		mTimerTextView = (TextView) findViewById(R.id.timer);
-		mTimer = new CountDownTimer(15000, 1000) {
+		mTimer = new CountDownTimer(100000, 1000) {
 			public void onTick(long millisUntilFinished) {
 				mTimerTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
 			}
