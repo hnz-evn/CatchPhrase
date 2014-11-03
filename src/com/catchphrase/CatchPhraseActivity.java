@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Random;
 
 public class CatchPhraseActivity extends Activity {
 
+	private static final int MIN_TIMER_LENGTH = 5;
+	private static final int MAX_TIMER_LENGTH = 10;
+	
 	private Button mNextButton;
 	private Button mSkipButton;
 	private TextView mCatchphraseTextView;
@@ -20,6 +24,9 @@ public class CatchPhraseActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		Random rand = new Random();
+		int timerLength = 1000*(rand.nextInt((MAX_TIMER_LENGTH - MIN_TIMER_LENGTH) + 1) + MIN_TIMER_LENGTH);
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_catch_phrase);
@@ -32,8 +39,9 @@ public class CatchPhraseActivity extends Activity {
 		mCatchphraseTextView.setText(mWords.getNextWord());
 		
 		// set up timer and tie it to timer textview
+
 		mTimerTextView = (TextView) findViewById(R.id.timer);
-		mTimer = new CountDownTimer(100000, 1000) {
+		mTimer = new CountDownTimer(timerLength, 1500) {
 			public void onTick(long millisUntilFinished) {
 				mTimerTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
 			}
