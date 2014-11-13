@@ -1,31 +1,39 @@
 package com.catchphrase;
 
-import java.util.List;
+import java.io.IOException;
 
 import android.content.Context;
+import android.database.SQLException;
 
 public class Words {
 	
-	private static int index;
 	private DatabaseHandler db;
 	
 	// constructor
 	public Words(Context context) {
-		index = 1;
+		// set up database handler
 		db = new DatabaseHandler(context);
+		try {
+			db.createDB();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
+		
+		try {
+			db.openDB();
+		} catch (SQLException sqle) {
+			throw new Error("Unable to open database");
+		}
 	}
 
-	// returns next word in the array, resets index once it reaches end of string array
+	// returns random word in the database, if no words were returned then reset the database
 	public String getNextWord() {
-		String word = db.getWord(index);
+		String word = db.getWord();
 		
-		// if no words were returned, reached end of word list (might change this, looks janky)
+		// if no words were returned reset the 'read' variable in each word
 		if (word == null) {
-			index = 1;
-			word = getNextWord();
-		}
-		else {
-			index++;
+			// TODO: add resetDB method
+			// db.resetDB();
 		}
 		
 		return word;
