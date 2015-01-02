@@ -14,6 +14,9 @@ public class Words {
 		// set up database handler
 		db = new DatabaseHandler(context);
 		try {
+			//TODO:delete before release
+			//This line is for when database is updated, uncomment and run once
+			//context.deleteDatabase("catchphrase");
 			db.createDB();
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
