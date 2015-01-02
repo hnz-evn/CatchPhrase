@@ -17,10 +17,5 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    
-    <style name="ButtonBarButton">
-	</style>
 
-	<style name="ButtonBar" parent="@android:style/ButtonBar">
-	</style>
 </resources>

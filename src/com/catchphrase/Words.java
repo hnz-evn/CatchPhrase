@@ -35,8 +35,8 @@ public class Words {
 		
 		// if no words were returned reset the 'read' variable in each word
 		if (word == null) {
-			// TODO: add resetDB method
-			// db.resetDB();
+			db.resetDB();
+			word = db.getWord();
 		}
 		
 		return word;

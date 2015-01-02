@@ -56,6 +56,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// close cursor
 		cursor.close();
 		
+		db.execSQL("UPDATE Words SET read = 1");
+		
 		return word;
 	}
 	
@@ -153,25 +155,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		database = SQLiteDatabase.openDatabase(path,  null, SQLiteDatabase.OPEN_READONLY);
 	}
 	
-	// create table
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-//		String createWordsTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT)", TABLE_WORDS, KEY_ID, KEY_WORD);
-//		db.execSQL(createWordsTable);
-//		
-//		// on database creation, add words to table
-//		if (db != null) {
-//			insertMultiple(db, WordList.list);
-//		}
+	// resets all "read" fields to 0 {
+	public void resetDB() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		if (db != null) {
+			db.execSQL(String.format("UPDATE %s SET %s = 0", TABLE_WORDS, KEY_READ));
+		}
 	}
-	
-	// upgrade table
+
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//		// drop old table if already exists
-//		db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORDS);
-//		
-//		// create table
-//		onCreate(db);
+	public void onCreate(SQLiteDatabase arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
 	}
 }
