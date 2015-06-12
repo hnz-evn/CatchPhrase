@@ -2,6 +2,7 @@ package com.catchphrase;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -34,21 +35,15 @@ public class CatchPhraseActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
 		int timerLength;
 		Random rand = new Random();
-		
-		if(savedInstanceState != null)
-		{
-			timerLength = savedInstanceState.getInt(KEY_TIMER, 0);
-		}
-		else
-		{	
-			timerLength = 1000 * (rand.nextInt((MAX_TIMER_LENGTH - MIN_TIMER_LENGTH) + 1) + MIN_TIMER_LENGTH);
-		}
+
+		timerLength = 1000 * (rand.nextInt((MAX_TIMER_LENGTH - MIN_TIMER_LENGTH) + 1) + MIN_TIMER_LENGTH);
 		vibrateStart = 1000 * (rand.nextInt(MIN_TIMER_LENGTH + 1) + MIN_VIBRATE_TIME);
 		vibe = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
-				
-		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_catch_phrase);
 		
 		//create media player
@@ -63,26 +58,10 @@ public class CatchPhraseActivity extends Activity {
 		mCatchphraseTextView.setText(mWords.getNextWord());
 		
 		// set up timer and tie it to timer text view
-
 		mTimerTextView = (TextView) findViewById(R.id.timer);
+
 		//TODO: create wrapper class MyCountDownTimer so we can resume with same time left...
 		mTimer = new MyCountDownTimer(timerLength, 1000, this, vibe, vibrateStart);
-//		mTimer = new CountDownTimer(timerLength, 1000){
-//			public void onTick(long millisUntilFinished) {
-//				mTimerTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
-//				
-//				if(millisUntilFinished < vibrateStart)
-//					vibrate(100, (int)millisUntilFinished);
-//			}
-//			public void onFinish() {
-//				mTimerTextView.setText("0s");
-//				Toast toast = Toast.makeText(getApplicationContext(), "Time's up!", Toast.LENGTH_LONG);
-//				toast.show();
-//				mPlayer.start();
-//				vibe.vibrate(1000);
-//				CatchPhraseActivity.super.finish();
-//			}
-//		};
 		mTimer.start();
 		
 		// initialize buttons and set onclick events
@@ -102,14 +81,10 @@ public class CatchPhraseActivity extends Activity {
 				mCatchphraseTextView.setText(mWords.getNextWord());
 			}
 		});
-		
-		
-
 	}
 	
 	//TODO: add all these methods to handle going in/out of focus
-	
-	
+
 	@Override
 	protected void onPause()
 	{
@@ -123,8 +98,11 @@ public class CatchPhraseActivity extends Activity {
 	protected void onResume()
 	{
 		super.onResume();
-		if(mTimer == null)
+
+		if (mTimer == null) {
 			mTimer = new MyCountDownTimer(timeRemaining, 1000, this, vibe, vibrateStart);
+			mTimer.start();
+		}
 	}
 	
 //	@Override
