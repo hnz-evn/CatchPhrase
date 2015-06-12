@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
 import android.media.AudioManager;

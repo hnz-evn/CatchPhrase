@@ -1,14 +1,10 @@
 package com.catchphrase;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.os.Vibrator;
 import android.media.MediaPlayer;
 import android.media.AudioManager;
